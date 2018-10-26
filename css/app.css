@@ -1,0 +1,275 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    cursor: default;
+    animation-duration: .75s;
+    transition: 100ms linear;
+    background: #f08080;
+    border-radius: 5px;
+    animation: shake 0.5s;
+
+}
+
+.deck .card.show {
+    font-size: 33px;
+
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #02ccba;
+    animation-duration: .75s;
+    animation: match-shake 0.5s;
+}
+
+
+
+/* disable double click on the card */
+
+
+
+.deck .card.disable {
+    pointer-events: none;
+
+}
+
+.deck .card.unmatch {
+animation: shake 0.5s;
+font-size: 0;
+
+
+}
+/*
+ * No Match shake animation. From https://www.w3schools.com/howto/howto_css_shake_image.asp
+ */
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+/*
+ * Match shake animation
+ */
+
+@keyframes match-shake {
+
+  from {
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+    20% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -40deg);
+        animation-timing-function: ease-in;
+    }
+    40% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+        animation-timing-function: ease-in;
+    }
+    60% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+        opacity: 1;
+    }
+    80% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+    }
+    to {
+        transform: perspective(400px);
+    }
+}
+
+/*
+*Congratulatory message style
+*/
+.message{
+  display: none;
+  position: relative;
+  font-family: 'Grand Hotel', cursive;
+  font-size: 25px;
+}
+
+.fa-trophy{
+  color: #FFD700;
+  size: 42px;
+}
+
+.inner{
+margin-top: 0;
+margin-left: 2%;
+margin-bottom: 0;
+box-sizing: border-box;
+width: 500px;
+height: 400px;
+border: 2px outset #1E90FF;
+border-radius: 30px;
+background: #00BFFF;
+padding: 3px;
+text-align: center;
+}
+
+/*
+*styling the play-again button
+*/
+.play-again {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 865px) {
+    .inner{
+        margin-left: 33%;
+    }
+}
+/*
+ * Styles for the Score Panel
+ */
+
+.gameover{
+  display:none;
+  position: relative;
+}
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+.score-panel .timer {
+    float: right;
+
+}
